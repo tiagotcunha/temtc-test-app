@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { fetchStatus } from "./../api";
+import { useHistory } from "react-router-dom";
+
 const Loader = styled.div`
   background: red;
   border: 2px solid lighten($base-color, 75%);
@@ -21,20 +23,26 @@ const Frame = styled.div`
 
 const ScreenLoader = (props) => {
   const [loading, setLoading] = useState(true);
+  let history = useHistory();
 
   const checkStatus = async () => {
     const { data, status } = await fetchStatus();
     if (status === 200 && data.status === "OK") {
       setLoading(false);
+      goToList()
     } else {
       setLoading(true);
     }
   }
 
+  function goToList(id) {
+    history.push('/list');
+  }
+
   useEffect(() => {
     checkStatus();
-  });
-  
+  },[]);
+
   return <Frame>{loading && <Loader />}</Frame>;
 };
 
