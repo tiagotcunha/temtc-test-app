@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { ThemeProvider, CSSReset } from "@chakra-ui/core";
 import ScreenList from "./pages/screen_list";
 import ScreenDetail from "./pages/screen_detail";
+import ScreenShare from "./pages/screen_share";
 const AppHeader = styled.header`
   background: gray;
   width: 100%;
@@ -33,6 +34,9 @@ function App() {
             </Route>
             <Route path="/question/:id">
               <ScreenDetail />
+            </Route>
+            <Route path="/share">
+              <ScreenShare />
             </Route>
           </Switch>
         </Router>
