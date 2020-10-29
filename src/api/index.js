@@ -21,8 +21,8 @@ export const fetchStatus = async () => {
 export const fetchList = async ({filter = ""}) => {
   return await instance.get("/questions", {
     params: {
-      limit: "",
-      offset: "",
+      limit: 10,
+      offset: 0,
       filter: filter,
     },
   });
@@ -34,4 +34,14 @@ export const fetchQuestion = async (id) => {
 
 export const updateQuestion = async (id, body) => {
   return await instance.put("/questions/" + id, body);
+};
+
+
+export const share = async (destination_email="",content_url="") => {
+  return await instance.post("/share",{},{
+    params:{
+      destination_email:destination_email,
+      content_url:content_url
+    }
+  });
 };
