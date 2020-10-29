@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { fetchStatus } from "./../api";
 const Loader = styled.div`
   background: red;
   border: 2px solid lighten($base-color, 75%);
@@ -17,13 +18,24 @@ const Loader = styled.div`
 const Frame = styled.div`
   height: 100vh;
 `;
+
 const ScreenLoader = (props) => {
-  return (
-    <Frame>
-      <Loader>
-      </Loader>
-    </Frame>
-  );
+  const [loading, setLoading] = useState(true);
+
+  const checkStatus = async () => {
+    const { data, status } = await fetchStatus();
+    if (status === 200 && data.status === "OK") {
+      setLoading(false);
+    } else {
+      setLoading(true);
+    }
+  }
+
+  useEffect(() => {
+    checkStatus();
+  });
+  
+  return <Frame>{loading && <Loader />}</Frame>;
 };
 
 export default ScreenLoader;
