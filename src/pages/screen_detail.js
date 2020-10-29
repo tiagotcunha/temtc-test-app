@@ -18,7 +18,6 @@ const ScreenDetail = (props) => {
   let { id } = useParams();
 
   let history = useHistory();
-  console.log(history);
   const [question, setQuestion] = useState(null);
   const [chosedChoice, setChosedChoice] = useState(null);
 

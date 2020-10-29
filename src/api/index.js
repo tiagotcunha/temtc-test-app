@@ -15,26 +15,23 @@ instance.interceptors.response.use(
 );
 
 export const fetchStatus = async () => {
-    return await instance.get('/health');
-}
+  return await instance.get("/health");
+};
 
 export const fetchList = async () => {
-    return await instance.get('/questions',{
-        params: {
-            limit:"",
-            offset:"",
-            filter:""
-        }
-    });
-}
-
+  return await instance.get("/questions", {
+    params: {
+      limit: "",
+      offset: "",
+      filter: "",
+    },
+  });
+};
 
 export const fetchQuestion = async (id) => {
-    return await instance.get('/questions/'+ id);
-}
-
+  return await instance.get("/questions/" + id);
+};
 
 export const updateQuestion = async (id, body) => {
-    return await instance.put('/questions/'+ id,body);
-}
-
+  return await instance.put("/questions/" + id, body);
+};
