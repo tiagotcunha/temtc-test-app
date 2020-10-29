@@ -34,7 +34,7 @@ export const fetchQuestion = async (id) => {
 }
 
 
-export const updateQuestion = async (id) => {
-    return await instance.put('/questions/'+ id);
+export const updateQuestion = async (id, body) => {
+    return await instance.put('/questions/'+ id,body);
 }
 
