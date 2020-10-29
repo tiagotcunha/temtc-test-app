@@ -30,7 +30,10 @@ const ScreenLoader = () => {
     setserviceNotAvaible(false);
     setLoading(true);
 
-    const { data, status } = await fetchStatus();
+    const request = await fetchStatus();
+    console.log(request)
+
+    const  { data, status, error }  = request;
     if (status === 200 && data.status === "OK") {
       setLoading(false);
       goToList();
@@ -43,6 +46,8 @@ const ScreenLoader = () => {
   function goToList(id) {
     history.push("/list");
   }
+
+ 
 
   function reConnect() {
     checkStatus();

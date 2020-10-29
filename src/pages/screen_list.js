@@ -28,7 +28,7 @@ function Feature({ title, desc, image, onClick, ...rest }) {
         <Heading fontSize="xl" pt={3}>{title}</Heading>
         <Text mt={4}>{desc}</Text>
         <Button variantColor="green" onClick={onClick} mt={2}>
-          Button
+          Detail
         </Button>
       </Box>
     </Box>

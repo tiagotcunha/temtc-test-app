@@ -49,7 +49,12 @@ const ScreenDetail = (props) => {
     history.goBack();
   };
 
-  var onChangeChoice = (e) => {
+  const onChangeChoice = (e) => {
+    setChosedChoice(e.target.value);
+  };
+
+  const shareButton = (e) => {
+    history.push(`/share?content= + ${question.question} \n ${window.location.href} `);
     setChosedChoice(e.target.value);
   };
 
@@ -60,6 +65,9 @@ const ScreenDetail = (props) => {
           <Flex >
             <Button variantColor="green" onClick={returnToList}>
               Back to list
+            </Button>
+            <Button variantColor="blue" onClick={shareButton}>
+              share
             </Button>
           </Flex>
 
