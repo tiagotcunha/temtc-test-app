@@ -1,4 +1,6 @@
 import axios from "axios";
+import { BehaviorSubject } from 'rxjs';
+export const errorInterceptor = new BehaviorSubject();
 
 const instance = axios.create({
   baseURL: `${process.env.REACT_APP_API}`,
@@ -9,8 +11,10 @@ instance.interceptors.response.use(
     return response;
   },
   function (error) {
-    console.log(error);
-    return Promise.reject(new Error(error));
+    if(error == 'Error: Network Error'){
+      errorInterceptor.next('noConnection')
+    }
+    return error
   }
 );
 
