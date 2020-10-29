@@ -10,9 +10,12 @@ import {
   RadioGroup,
   Spinner,
   Button,
+  Stack,
+  Flex,
 } from "@chakra-ui/core";
 const Frame = styled.div`
-  height: 100vh;
+  display: flex;
+  justify-content: center;
 `;
 const ScreenDetail = (props) => {
   let { id } = useParams();
@@ -31,7 +34,8 @@ const ScreenDetail = (props) => {
   useEffect(async () => {
     if (chosedChoice != null) {
       console.log("before", question.choices[chosedChoice]);
-      question.choices[chosedChoice].votes = +question.choices[chosedChoice].votes + 1;
+      question.choices[chosedChoice].votes =
+        +question.choices[chosedChoice].votes + 1;
       console.log("after", question.choices[chosedChoice]);
 
       const { status, data } = await updateQuestion(id, question);
@@ -45,35 +49,36 @@ const ScreenDetail = (props) => {
     history.goBack();
   };
 
-  var onChangeChoice = (e)=>{
-    setChosedChoice(e.target.value)
-  }
+  var onChangeChoice = (e) => {
+    setChosedChoice(e.target.value);
+  };
 
   const info = () => {
     return (
       <>
-        <Box size="sm">
+        <Stack spacing={8} p={4} >
+          <Flex >
+            <Button variantColor="green" onClick={returnToList}>
+              Back to list
+            </Button>
+          </Flex>
+
           <Image src={question.image_url} alt="Segun Adebayo" />
-        </Box>
-        <Button variantColor="green" onClick={returnToList}>
-          Button
-        </Button>
-        <Heading fontSize="xl">{question.question}</Heading>
-        <RadioGroup
-          onChange={onChangeChoice}
-          value={chosedChoice}
-        >
-          {question.choices.map(({ choice, votes }, index) => (
-            <Radio key={index} value={index}>
-              {choice} - {votes}
-            </Radio>
-          ))}
-        </RadioGroup>
+
+          <Heading fontSize="xl">{question.question}</Heading>
+          <RadioGroup onChange={onChangeChoice} value={chosedChoice} mb={4}>
+            {question.choices.map(({ choice, votes }, index) => (
+              <Radio key={index} value={index} name="radio">
+                {choice} - {votes}
+              </Radio>
+            ))}
+          </RadioGroup>
+        </Stack>
       </>
     );
   };
 
-  return <Frame>{question != null ? info() : <Spinner />}</Frame>;
+  return <Frame>{question != null ? info() : <Spinner mt={5} />}</Frame>;
 };
 
 export default ScreenDetail;

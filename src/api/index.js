@@ -18,12 +18,12 @@ export const fetchStatus = async () => {
   return await instance.get("/health");
 };
 
-export const fetchList = async () => {
+export const fetchList = async ({filter = ""}) => {
   return await instance.get("/questions", {
     params: {
       limit: "",
       offset: "",
-      filter: "",
+      filter: filter,
     },
   });
 };

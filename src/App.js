@@ -6,15 +6,24 @@ import { ThemeProvider, CSSReset } from "@chakra-ui/core";
 import ScreenList from "./pages/screen_list";
 import ScreenDetail from "./pages/screen_detail";
 const AppHeader = styled.header`
-  background: red;
+  background: gray;
+  width: 100%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px;
 `;
 function App() {
   return (
     <div>
-      <ThemeProvider >
+      <ThemeProvider>
         <CSSReset />
         <Router>
-          <AppHeader />
+          <AppHeader>
+            <p>Bliss Recruitment</p>
+            <p>Tiago Cunha</p>
+          </AppHeader>
           <Switch>
             <Route exact path="/">
               <ScreenLoader />
