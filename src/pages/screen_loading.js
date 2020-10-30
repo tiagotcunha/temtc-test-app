@@ -1,8 +1,14 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { fetchStatus } from "./../api";
 import { useHistory } from "react-router-dom";
 import { Button } from "@chakra-ui/core";
+
+const loaderAnimation = keyframes`
+  0%   {transform: scale(.8);}
+  100% {transform: scale(1.5);}
+`;
+
 const Loader = styled.div`
   background: red;
   border: 2px solid lighten($base-color, 75%);
@@ -14,11 +20,16 @@ const Loader = styled.div`
   margin: auto;
   position: absolute;
   left: 50%;
+  animation-name: ${loaderAnimation};
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
   top: 50%;
   transform: translate(-50%, -50%);
 `;
 const Frame = styled.div`
   height: 100vh;
+  display: flex;
+  justify-content: center;
 `;
 
 const ScreenLoader = () => {
@@ -31,9 +42,8 @@ const ScreenLoader = () => {
     setLoading(true);
 
     const request = await fetchStatus();
-    console.log(request)
 
-    const  { data, status, error }  = request;
+    const { data, status, error } = request;
     if (status === 200 && data.status === "OK") {
       setLoading(false);
       goToList();
@@ -46,8 +56,6 @@ const ScreenLoader = () => {
   function goToList(id) {
     history.push("/list");
   }
-
- 
 
   function reConnect() {
     checkStatus();

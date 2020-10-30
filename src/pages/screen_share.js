@@ -34,7 +34,7 @@ const ScreenShare = (props) => {
 
       const { status, data } = await share(email, content);
 
-      if (status == 200 && data) {
+      if (status === 200 && data) {
         toast({
           title: "Content send.",
           description: "Content send to " + email,
@@ -62,7 +62,7 @@ const ScreenShare = (props) => {
     if (history.location.search != "") {
       const query = queryString.parse(history.location.search);
       if ("content" in query) {
-        setContent(query.content);
+        setContent(query.content.trim());
       }
     }
   });

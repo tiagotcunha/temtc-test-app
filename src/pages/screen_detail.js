@@ -26,7 +26,7 @@ const ScreenDetail = (props) => {
 
   useEffect(async () => {
     const { status, data } = await fetchQuestion(id);
-    if (status == 200) {
+    if (status === 200) {
       setQuestion(data);
     }
   }, []);
@@ -39,7 +39,7 @@ const ScreenDetail = (props) => {
       console.log("after", question.choices[chosedChoice]);
 
       const { status, data } = await updateQuestion(id, question);
-      if (status == 200) {
+      if (status === 200) {
         setQuestion(data);
       }
     }
@@ -66,7 +66,7 @@ const ScreenDetail = (props) => {
             <Button variantColor="green" onClick={returnToList}>
               Back to list
             </Button>
-            <Button variantColor="blue" onClick={shareButton}>
+            <Button variantColor="blue" onClick={shareButton} ml={2}>
               share
             </Button>
           </Flex>

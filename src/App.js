@@ -25,7 +25,7 @@ function Routes() {
   const [noInternet, setInternet] = useState(false);
   useEffect((e) => {
     errorInterceptor.subscribe((event) => {
-      if (event == "noConnection") {
+      if (event === "noConnection") {
         setInternet(true);
       }
     });
