@@ -14,9 +14,8 @@ import {
 } from "@chakra-ui/core";
 import { useHistory } from "react-router-dom";
 import { debounce } from "throttle-debounce";
-const Frame = styled.div`
-  height: 100vh;
-`;
+import { format } from "date-fns/fp";
+
 
 function Feature({ title, desc, image, onClick, ...rest }) {
   return (
@@ -25,7 +24,9 @@ function Feature({ title, desc, image, onClick, ...rest }) {
         <Image src={image} alt="Segun Adebayo" />
       </Box>
       <Box pl={15} size="sm">
-        <Heading fontSize="xl" pt={3}>{title}</Heading>
+        <Heading fontSize="xl" pt={3}>
+          {title}
+        </Heading>
         <Text mt={4}>{desc}</Text>
         <Button variantColor="green" onClick={onClick} mt={2}>
           Detail
@@ -44,15 +45,17 @@ function List({ questions }) {
 
   return (
     <Stack isInline spacing={8} align="center">
-      {questions.map((item) => (
-        <Feature
-          key={item.id}
-          title={item.question}
-          desc={item.published_at}
-          image={item.image_url}
-          onClick={(e) => handleClick(item.id)}
-        />
-      ))}
+      {questions.map((item) => {
+        return (
+          <Feature
+            key={item.id}
+            title={item.question}
+            desc={''}
+            image={item.image_url}
+            onClick={(e) => handleClick(item.id)}
+          />
+        );
+      })}
     </Stack>
   );
 }
